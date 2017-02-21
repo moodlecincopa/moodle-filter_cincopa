@@ -15,7 +15,7 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Version information
+ * Cincopa filter settings
  *
  * @package    filter
  * @subpackage cincopa
