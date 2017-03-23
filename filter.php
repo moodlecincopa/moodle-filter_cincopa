@@ -16,7 +16,7 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Cincopa Filter converts string "[cincopa galleryid]" to embed gallery.
+ * Version information
  *
  * @package    filter
  * @subpackage cincopa
@@ -26,26 +26,25 @@
 class filter_cincopa extends moodle_text_filter {
 
     public function filter($text, array $options = array()) {
-
+       // Do a quick check using stripos to avoid unnecessary work
         if (strpos($text, 'cincopa') === false) {
             return $text;
         }
-        //Get all matches without bracket from text
         $matches = array();
-        preg_match_all("/\[(cincopa)\s+(.+)\]/", $text, $matches);
+
+        preg_match_all("/\[(cincopa)\s+(.+?)\]/", $text, $matches);
 
         if (!empty($matches)) {
-            $cincopa_string = $matches[1][0];
-            $gallery_string = $matches[2][0];
-           
-           
-                //Now find a particular string in whole text and
-                //replace it with a predefined string
-                //Generate random string
-                $characters = time() . '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-                $randomString = '';
-                for ($i = 0; $i < 6; $i++)
-                    $randomString .= $characters[rand(0, 10 - 1)];
+          
+            $finded_matches = $matches[2];
+            $cincopa_string = 'cincopa';
+            $gallery_string = '';
+            //Iterate loop on finded_matches
+            foreach ($finded_matches as $match) {
+                $gallery_string = $match;
+              
+                $randomString = uniqid();
+                $randomString = substr($randomString, 7);
 
                 $predefined_string = '';
                 $predefined_string .= '<div id="cp_widget_' . $randomString . '">&nbsp;</div>';
@@ -63,7 +62,7 @@ class filter_cincopa extends moodle_text_filter {
                 $cincopa_string_for_find_wo_space = "[$cincopa_string $gallery_string]";
                 $text = str_replace($cincopa_string_for_find, $predefined_string, $text);
                 $text = str_replace($cincopa_string_for_find_wo_space, $predefined_string, $text);
-            
+            }
         }
         return $text;
     }

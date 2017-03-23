@@ -26,6 +26,9 @@
 defined('MOODLE_INTERNAL') || die();
 
 if ($ADMIN->fulltree) {
+    
+    $description = new lang_string('description', 'filter_cincopa');
+    $settings->add(new admin_setting_heading('defaultsettings', '', $description));
 
     $settings->add(new admin_setting_configmulticheckbox('filter_cincopa/formats',
             get_string('settingformats', 'filter_cincopa'),
