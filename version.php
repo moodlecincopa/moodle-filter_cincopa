@@ -29,4 +29,4 @@ $plugin->version   = 2017031700;       // The current plugin version (Date: YYYY
 $plugin->requires  = 2010112400;       // Requires this Moodle version
 $plugin->component = 'filter_cincopa'; // Full name of the plugin (used for diagnostics)
 $plugin->maturity  = MATURITY_STABLE;
-$plugin->release   = 'v1.0.0';
+$plugin->release   = 'v1.0.1';
